@@ -57,10 +57,7 @@ mvn spring-boot:run
 
 2. Access the APIs using a REST client such as Postman or cURL.
 
-3. Refer to the API documentation for details on how to use each endpoint.
-
-
-3. Refer to the API documentation for details on how to use each endpoint.
+3. Refer to the API documentation for details on how to use each endpoint  [here](https://docs.google.com/document/d/1BjaFYo8NgyKJknSOVKkXJXoY4SqegKJ_jGgGE9gaqoE/edit?usp=sharing).
 
 ## Testing
 
