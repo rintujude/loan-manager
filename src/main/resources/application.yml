@@ -4,7 +4,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/loanManager
     username: postgres
-    password: Bestdoc@123
+    password: e5EST4iQ|$8I
   jpa:
     hibernate:
       ddl-auto: update
