@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.util.List;
 
 @Service
@@ -38,7 +37,6 @@ public class LoanService {
             } else {
                 monthlyRepayment = calculateMonthlyRepaymentWithoutBalloon(totalLoanAmount, monthlyInterestRate, enquiry.getNumberOfPayments());
             }
-            System.out.println("monthlyRepayment: "+monthlyRepayment);
             Amortisation amortisation = new Amortisation();
             double balance = totalLoanAmount;
             double totalInterest = 0;
@@ -85,6 +83,7 @@ public class LoanService {
     public List<Enquiry> fetchAllGeneratedSchedules() throws EnquiryNotFoundException {
         List<Enquiry> enquiries = enquiryRepository.findAll();
         if (!enquiries.isEmpty()){
+            logger.info("enquiries fetched successfully, total count {}",enquiries.size());
             return enquiries;
         }
         throw new EnquiryNotFoundException("no enquiries found");
@@ -94,7 +93,7 @@ public class LoanService {
         return enquiryRepository.findById(id).orElseThrow(() -> new EnquiryNotFoundException("enquiry not found"));
     }
 
-    public void deleteScheduleById(Long id) throws EnquiryNotFoundException {
+    public void deleteScheduleById(Long id)  {
          enquiryRepository.deleteById(id);
     }
 }

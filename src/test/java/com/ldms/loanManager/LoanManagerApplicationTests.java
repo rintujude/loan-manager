@@ -8,7 +8,6 @@ class LoanManagerApplicationTests {
 
 	@Test
 	void contextLoads() {
-		System.out.println("testttttt");
 	}
 
 }

@@ -3,11 +3,8 @@ package com.ldms.loanManager.loanManagement.controller;
 import com.ldms.loanManager.exception.EnquiryNotFoundException;
 import com.ldms.loanManager.loanManagement.model.Enquiry;
 import com.ldms.loanManager.loanManagement.model.EnquiryRequest;
-import com.ldms.loanManager.loanManagement.model.Schedule;
 import com.ldms.loanManager.loanManagement.service.LoanService;
-import com.ldms.loanManager.utils.CommonUtils;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +29,7 @@ public class LoanController {
     @PostMapping("/generate-schedule")
     public ResponseEntity<Enquiry> generateSchedule(@RequestBody @Valid EnquiryRequest enquiryRequest){
         Enquiry enquiry = new Enquiry(enquiryRequest.getAssetCost(),enquiryRequest.getDeposit(),enquiryRequest.getInterestRate(),enquiryRequest.getNumberOfPayments(),enquiryRequest.getBalloonPayment());
+        logger.info("Enquiry Generated Successfully");
         return new ResponseEntity<>(loanService.generateSchedule(enquiry), HttpStatus.CREATED) ;
     }
 
@@ -42,11 +40,13 @@ public class LoanController {
 
     @GetMapping("/enquiry/{id}")
     public ResponseEntity<Enquiry> generateScheduleDetails(@PathVariable Long id) throws EnquiryNotFoundException {
-        return ResponseEntity.ok(loanService.getSchedule(id));
+        Enquiry enquiry = loanService.getSchedule(id);
+        logger.info("enquiry details fetched successfully with the id: {}",id);
+        return ResponseEntity.ok(enquiry);
     }
 
     @DeleteMapping("/enquiry/{id}")
-    public boolean deleteEnquiry(@PathVariable Long id) throws EnquiryNotFoundException {
+    public boolean deleteEnquiry(@PathVariable Long id) {
         loanService.deleteScheduleById(id);
         return true;
     }
